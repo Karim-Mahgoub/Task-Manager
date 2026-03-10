@@ -1,124 +1,124 @@
 <script setup>
+import { reactive } from "vue";
 
-const tasks= [
-    {
-      name: "Website design",
-      description: "Define the style guide, branding and create the webdesign on Figma.",
-      completed: true
-    },
-    {
-      name: "Website development",
-      description: "Develop the portfolio website using Vue JS.",
-      completed: false
-    },
-    {
-      name: "Hosting and infrastructure",
-      description: "Define hosting, domain and infrastructure for the portfolio website.",
-      completed: false
-    },
-    {
-      name: "Composition API",
-      description: "Learn how to use the composition API and how it compares to the options API.",
-      completed: true
-    },
-    {
-      name: "Pinia",
-      description: "Learn how to setup a store using Pinia.",
-      completed: true
-    },
-    {
-      name: "Groceries",
-      description: "Buy rice, apples and potatos.",
-      completed: false
-    },
-    {
-      name: "Bank account",
-      description: "Open a bank account for my freelance business.",
-      completed: false
-    }
-];
+const appName = "My new task manager";
 
+let tasks = reactive([
+  {
+    name: "Website design",
+    description:
+      "Define the style guide, branding and create the webdesign on Figma.",
+    completed: true,
+  },
+  {
+    name: "Website development",
+    description: "Develop the portfolio website using Vue JS.",
+    completed: false,
+  },
+  {
+    name: "Hosting and infrastructure",
+    description:
+      "Define hosting, domain and infrastructure for the portfolio website.",
+    completed: false,
+  },
+  {
+    name: "Composition API",
+    description:
+      "Learn how to use the composition API and how it compares to the options API.",
+    completed: true,
+  },
+  {
+    name: "Pinia",
+    description: "Learn how to setup a store using Pinia.",
+    completed: true,
+  },
+  {
+    name: "Groceries",
+    description: "Buy rice, apples and potatos.",
+    completed: false,
+  },
+  {
+    name: "Bank account",
+    description: "Open a bank account for my freelance business.",
+    completed: false,
+  },
+]);
+
+let newTask = { completed: false };
+
+function addTask() {
+  if (newTask.name && newTask.description) {
+    tasks.push(newTask);
+    newTask = { completed: false };
+  } else {
+    alert("Please enter title and description for the task");
+  }
+}
 </script>
 
 <template>
-
   <main class="container">
     <div class="header">
       <div class="header-side">
-        <h1>
-          Tasks Manager
-        </h1>
+        <h1>{{ appName }}</h1>
       </div>
     </div>
-    
+
     <div class="filters">
       <div>
         <p>Filter by state</p>
         <div class="badges">
-          <div class="badge">
-            To-Do
-          </div>
-          <div class="badge">
-            Done
-          </div>
-          <span class="clear">
-            x clear
-          </span>
+          <div class="badge">To-Do</div>
+          <div class="badge">Done</div>
+          <span class="clear"> x clear </span>
         </div>
       </div>
     </div>
 
     <div class="tasks">
-      
-      <div class="task">
+      <div v-for="(task, index) in tasks" class="task">
         <h3>
-          Website design
+          {{ task.name }}
         </h3>
         <p>
-          Define the style guide, branding and create the webdesign on Figma.
+          {{ task.description }}
         </p>
         <div class="task-check">
-          <input type="checkbox" checked />
-          <label>
-            Done
-          </label>
+          <input type="checkbox" checked="task.complated" />
+          <label> Done </label>
         </div>
       </div>
 
       <div class="task">
-        <h3>
-          Website development
-        </h3>
-        <p>
-          Develop the portfolio website using Vue JS.
-        </p>
+        <h3>Website development</h3>
+        <p>Develop the portfolio website using Vue JS.</p>
         <div class="task-check">
-          <input type="checkbox"/>
-          <label>
-            To-Do
-          </label>
+          <input type="checkbox" />
+          <label> To-Do </label>
         </div>
       </div>
-
     </div>
 
     <div class="add-task">
       <h3>Add a new task</h3>
-      <input type="text" name="title" placeholder="Enter a title..."><br />
-      <textarea name="description" rows="4" placeholder="Enter a description..." /><br />
-      <button class="btn gray">Add Task</button>
-
+      <input
+        v-model="newTask.name"
+        type="text"
+        name="title"
+        placeholder="Enter a title..."
+      /><br />
+      <textarea
+        v-model="newTask.description"
+        name="description"
+        rows="4"
+        placeholder="Enter a description..."
+      /><br />
+      <button @click="addTask" class="btn gray">Add Task</button>
     </div>
-
   </main>
-  
-   
-
 </template>
 
-
 <style lang="scss" scoped>
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -141,7 +141,6 @@ const tasks= [
       margin-left: 12px;
     }
   }
-
 }
 
 .filters {
@@ -173,7 +172,6 @@ const tasks= [
     text-align: left;
     cursor: pointer;
   }
-
 }
 
 .tasks {
@@ -195,7 +193,6 @@ const tasks= [
   border-radius: 12px;
   position: relative;
 
-
   h3 {
     font-size: 20px;
     font-weight: 700;
@@ -213,7 +210,6 @@ const tasks= [
     letter-spacing: 0em;
     text-align: left;
   }
-
 
   .task-check {
     display: flex;
@@ -240,17 +236,16 @@ const tasks= [
       width: 18px;
       height: 18px;
       border-radius: 100%;
-      border: 0.77px solid #AEAEB2;
+      border: 0.77px solid #aeaeb2;
       appearance: none;
       cursor: pointer;
 
-
       &:checked {
-        background-color: #0A7AFF;
-        border-color: #0A7AFF;
+        background-color: #0a7aff;
+        border-color: #0a7aff;
 
         &::before {
-          content: '';
+          content: "";
           display: block;
           width: 4.5px;
           height: 9px;
@@ -266,7 +261,8 @@ const tasks= [
 .add-task {
   margin-top: 60px;
 
-  input, textarea {
+  input,
+  textarea {
     width: 360px;
     max-width: 100%;
     margin-top: 12px;
@@ -278,6 +274,4 @@ const tasks= [
     margin-top: 12px;
   }
 }
-
-
 </style>

@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from "vue";
 
-const appName = "My new task manager";
+const appName = "Tasks Manager";
 
 let tasks = reactive([
   {

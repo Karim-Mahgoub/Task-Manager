@@ -1,5 +1,6 @@
 <script setup>
 import { reactive } from "vue";
+import Task from "./components/Task.vue";
 
 const appName = "Tasks Manager";
 
@@ -76,27 +77,7 @@ function addTask() {
     </div>
 
     <div class="tasks">
-      <div v-for="(task, index) in tasks" class="task">
-        <h3>
-          {{ task.name }}
-        </h3>
-        <p>
-          {{ task.description }}
-        </p>
-        <div class="task-check">
-          <input type="checkbox" checked="task.complated" />
-          <label> Done </label>
-        </div>
-      </div>
-
-      <div class="task">
-        <h3>Website development</h3>
-        <p>Develop the portfolio website using Vue JS.</p>
-        <div class="task-check">
-          <input type="checkbox" />
-          <label> To-Do </label>
-        </div>
-      </div>
+      <Task v-for="(task, index) in tasks" :task="task" :key="index" /> o
     </div>
 
     <div class="add-task">

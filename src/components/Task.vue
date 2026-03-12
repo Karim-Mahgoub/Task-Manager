@@ -4,9 +4,7 @@ const props = defineProps(["task"]);
 
 <template>
   <div class="task">
-    <h3>
-      {{ task.name }}
-    </h3>
+    <h3>{{ task.id }} - {{ task.name }}</h3>
     <p>
       {{ task.description }}
     </p>

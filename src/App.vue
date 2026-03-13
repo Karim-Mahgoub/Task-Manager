@@ -63,6 +63,14 @@ function addTask() {
     alert("Please enter title and description for the task");
   }
 }
+
+function toggleCompleted(id) {
+  tasks.forEach((task) => {
+    if (task.id === id) {
+      task.completed = !task.completded;
+    }
+  });
+}
 </script>
 
 <template>
@@ -85,7 +93,13 @@ function addTask() {
     </div>
 
     <div class="tasks">
-      <Task v-for="(task, index) in tasks" :task="task" :key="index" /> o
+      <Task
+        @toggleCompleted="toggleCompleted"
+        v-for="(task, index) in tasks"
+        :task="task"
+        :key="index"
+      />
+      o
     </div>
 
     <div class="add-task">
